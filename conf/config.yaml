@@ -1,3 +1,3 @@
 regionId: cn-hangzhou
-accessKeyId: "accessKeyId"
-accessKeySecret: "accessKeySecret"
+accessKeyId: <accessKeyId>
+accessKeySecret: <accessKeySecret>

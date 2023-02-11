@@ -15,7 +15,8 @@ func main() {
 	scene := flag.String("scene", "general", "翻译场景，详见阿里云文档")
 	configFile := flag.String("config", "/opt/translator/config.yaml", "配置文件")
 	flag.Parse()
-	config, err := parseConfig(*configFile)
+	configFileLocation := getConfigFileLocation(*configFile)
+	config, err := parseConfig(configFileLocation)
 	if err != nil {
 		return
 	}
@@ -51,6 +52,14 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(response.Data.Translated)
+}
+
+func getConfigFileLocation(locationFromCommand string) string {
+	locationFromEnv := os.Getenv("TRANSLATOR_CONFIG_LOCATION")
+	if locationFromEnv == "" {
+		return locationFromCommand
+	}
+	return locationFromEnv
 }
 
 func parseConfig(configFile string) (ClientConfig, error) {
